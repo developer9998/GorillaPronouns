@@ -1,10 +1,10 @@
 ﻿using BepInEx;
-using GorillaPronouns.Behaviours;
-using UnityEngine;
-using HarmonyLib;
-using BepInEx.Logging;
 using BepInEx.Configuration;
+using BepInEx.Logging;
+using GorillaPronouns.Behaviours;
 using GorillaPronouns.Behaviours.Networking;
+using HarmonyLib;
+using UnityEngine;
 
 namespace GorillaPronouns
 {

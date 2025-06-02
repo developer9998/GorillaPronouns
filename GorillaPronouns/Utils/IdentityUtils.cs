@@ -7,15 +7,15 @@ namespace GorillaPronouns.Utils
     {
         public static bool IsValidPronouns(string pronouns)
         {
-            if (pronouns == null || string.IsNullOrEmpty(pronouns))
-                return true;
+            if (string.IsNullOrEmpty(pronouns))
+                return pronouns is not null;
 
             if (!pronouns.Contains("/"))
                 return Constants.PronounPresets.Contains(pronouns);
 
-            string subjectStart = Constants.SubjectPronouns.FirstOrDefault(pronoun => pronouns.StartsWith(pronoun)) ?? null;
-            string subjectEnd = Constants.SubjectPronouns.FirstOrDefault(pronoun => pronouns.EndsWith(pronoun)) ?? null;
-            bool objectPronoun = Constants.ObjectPronouns.Any(pronoun => pronouns.EndsWith(pronoun));
+            string subjectStart = Constants.SubjectPronouns.FirstOrDefault(pronouns.StartsWith) ?? null;
+            string subjectEnd = Constants.SubjectPronouns.FirstOrDefault(pronouns.EndsWith) ?? null;
+            bool objectPronoun = Constants.ObjectPronouns.Any(pronouns.EndsWith);
 
             Logging.Info($"subject {subjectStart} & {subjectEnd} : object? {objectPronoun}");
 

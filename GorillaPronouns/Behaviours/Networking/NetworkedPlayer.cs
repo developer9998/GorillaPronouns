@@ -14,12 +14,12 @@ namespace GorillaPronouns.Behaviours.Networking
 
         public bool HasConfiguredPronouns;
 
-        private CustomIdentityPlayer playerIdentity;
+        private PlayerCustomIdentity playerIdentity;
 
         public void Start()
         {
             if (!TryGetComponent(out playerIdentity))
-                playerIdentity = gameObject.AddComponent<CustomIdentityPlayer>();
+                playerIdentity = gameObject.AddComponent<PlayerCustomIdentity>();
 
             NetworkHandler.Instance.OnPlayerPropertyChanged += OnPlayerPropertyChanged;
 

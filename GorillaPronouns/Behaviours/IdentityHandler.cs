@@ -13,27 +13,39 @@ namespace GorillaPronouns.Behaviours
     {
         private readonly Dictionary<Assembly, IdentityController> identityDevices = [];
 
-        public CustomIdentityPlayer LocalPlayer;
+        public PlayerCustomIdentity LocalPlayer;
 
         private ConfigEntry<string> savedPronouns;
 
         public override void Initialize()
         {
-            LocalPlayer = GorillaTagger.Instance.offlineVRRig.gameObject.AddComponent<CustomIdentityPlayer>();
-            //LocalPlayer.UpdateName();
+            LocalPlayer = GorillaTagger.Instance.offlineVRRig.gameObject.AddComponent<PlayerCustomIdentity>();
 
-            savedPronouns = Plugin.PluginConfigFile.Bind(Constants.Name, "Pronouns", string.Empty, "The pronouns selected by the local player");
+            savedPronouns = Plugin.PluginConfigFile.Bind(Constants.Name, "Pronouns", string.Empty, "The pronouns assigned by the player");
             OnConfiguredIdentity(savedPronouns.Value);
         }
 
         public void OnConfiguredIdentity(string pronouns)
         {
-            if (IdentityUtils.IsValidPronouns(pronouns))
+            try
             {
+                if (pronouns is null)
+                    throw new ArgumentNullException(nameof(pronouns), "Pronouns are null - if attempting to configure unlisted pronouns, send an empty string");
+
+                if (!IdentityUtils.IsValidPronouns(pronouns))
+                    throw new ArgumentException("Pronouns are not valid", nameof(pronouns));
+
                 savedPronouns.Value = pronouns;
                 NetworkHandler.Instance.SetProperty("Pronouns", pronouns);
                 LocalPlayer.Pronouns = pronouns;
                 LocalPlayer.UpdateName();
+            }
+            catch(Exception ex)
+            {
+                Logging.Fatal("Pronouns failed to configure");
+                Logging.Error(ex);
+
+                OnConfiguredIdentity(string.Empty);
             }
         }
 

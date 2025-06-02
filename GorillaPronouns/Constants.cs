@@ -8,11 +8,11 @@
 
         public const string Version = "1.0.0";
 
-        public readonly static string[] PronounPresets = [string.Empty, "they/them", "he/him", "she/her", "it/its", "any", "ask"];
+        public readonly static string[] PronounPresets = [string.Empty, "They/Them", "He/Him", "She/Her", "It/Its", "Any", "Ask"];
 
-        public readonly static string[] SubjectPronouns = ["they", "he", "she", "it"];
+        public readonly static string[] SubjectPronouns = ["They", "He", "She", "It"];
 
-        public readonly static string[] ObjectPronouns = ["them", "him", "her", "its"];
+        public readonly static string[] ObjectPronouns = ["Them", "Him", "Her", "Its"];
 
         public const float NetworkSetInterval = 0.25f;
 

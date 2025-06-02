@@ -19,7 +19,7 @@ namespace GorillaPronouns.Models
             get
             {
                 string[] objectPronouns = [.. Constants.ObjectPronouns];
-                for(int i = 0; i < objectPronouns.Length; i++)
+                for (int i = 0; i < objectPronouns.Length; i++)
                 {
                     if (Subject != null && Subject != Subjects[i])
                     {

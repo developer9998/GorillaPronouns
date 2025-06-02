@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using GorillaInfoWatch.Attributes;
 using GorillaInfoWatch.Models;
+using GorillaInfoWatch.Models.Widgets;
 using GorillaPronouns.Behaviours;
 using GorillaPronouns.Models;
-using GorillaInfoWatch.Models.Widgets;
 
 [assembly: WatchCompatibleMod]
 
@@ -23,7 +20,10 @@ namespace GorillaPronouns.InfoWatch.Models
         {
             base.OnScreenOpen();
 
-            controller ??= Singleton<IdentityHandler>.Instance.GetIdentity(OnConfiguredIdentity);
+            if (controller is not null)
+                controller.SwitchState(EIdentityControlState.ViewPronouns);
+            else
+                controller = Singleton<IdentityHandler>.Instance.GetIdentity(OnConfiguredIdentity);
         }
 
         public override ScreenContent GetContent()
@@ -39,9 +39,9 @@ namespace GorillaPronouns.InfoWatch.Models
                     {
                         lines.AddLine($"Pronouns: {(string.IsNullOrEmpty(Singleton<IdentityHandler>.Instance.LocalPlayer.Pronouns) ? "Unlisted" : Singleton<IdentityHandler>.Instance.LocalPlayer.Pronouns)}");
                         lines.AddLines(1);
-                        lines.AddLine("Manual Configure Pronouns:", new WidgetButton(OnAdvancedSelected));
+                        lines.AddLine("Select mixed pronoun:", new WidgetButton(OnAdvancedSelected));
                         lines.AddLines(1);
-                        foreach(string pronouns in presets)
+                        foreach (string pronouns in presets)
                         {
                             lines.AddLine(string.IsNullOrEmpty(pronouns) ? "Unlisted" : pronouns, new WidgetButton(OnPresetSelected, pronouns));
                         }
@@ -50,18 +50,18 @@ namespace GorillaPronouns.InfoWatch.Models
                 case EIdentityControlState.DefineSubject:
                     if (arguments.ElementAtOrDefault(0) is string[] subjects)
                     {
-                        lines.AddLine("Select a Subject pronoun");
+                        lines.AddLine("Select the subject pronoun");
                         lines.AddLines(1);
-                        foreach(string pronoun in subjects)
+                        foreach (string pronoun in subjects)
                         {
                             lines.AddLine(pronoun, new WidgetButton(OnSubjectSelected, pronoun));
                         }
                     }
                     break;
                 case EIdentityControlState.DefineObject:
-                    if (arguments.ElementAtOrDefault(0) is string[] objects && arguments.ElementAtOrDefault(1) is string subject)
+                    if (arguments.ElementAtOrDefault(0) is string[] objects)
                     {
-                        lines.AddLine("Select an Object pronoun");
+                        lines.AddLine("Select the object pronoun");
                         lines.AddLines(1);
                         foreach (string pronoun in objects)
                         {

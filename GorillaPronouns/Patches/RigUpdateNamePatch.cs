@@ -9,7 +9,7 @@ namespace GorillaPronouns.Patches
         [HarmonyWrapSafe, HarmonyPriority(Priority.Low)]
         public static void Postfix(VRRig __instance)
         {
-            if (__instance.TryGetComponent(out CustomIdentityPlayer component))
+            if (__instance.TryGetComponent(out PlayerCustomIdentity component))
                 component.UpdateName();
         }
     }

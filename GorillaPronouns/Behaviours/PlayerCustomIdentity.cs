@@ -1,4 +1,4 @@
-﻿using GorillaPronouns.Tools;
+﻿using System.Security.Cryptography;
 using GorillaPronouns.Utils;
 using TMPro;
 using UnityEngine;
@@ -6,9 +6,9 @@ using UnityEngine;
 namespace GorillaPronouns.Behaviours
 {
     [RequireComponent(typeof(VRRig))]
-    public class CustomIdentityPlayer : MonoBehaviour
+    public class PlayerCustomIdentity : MonoBehaviour
     {
-        public string Pronouns;
+        public string Pronouns = string.Empty;
 
         public VRRig Rig;
         public NetPlayer Creator;
@@ -46,9 +46,16 @@ namespace GorillaPronouns.Behaviours
             pronounText1.transform.SetParent(playerText1.transform);
             pronounText1.transform.localPosition = Vector3.down * 6.45f;
             pronounText1.transform.localEulerAngles = Vector3.zero;
-            pronounText1.transform.localScale = Vector3.one * 0.6f;
+            pronounText1.transform.localScale = Vector3.one * 0.5f;
+            pronounText1.gameObject.SetActive(false);
 
             #endregion
+        }
+
+        public void OnDestroy()
+        {
+            if (pronounTextInner != null)
+                Destroy(pronounTextInner.gameObject);
         }
 
         public void UpdateName()
@@ -62,17 +69,14 @@ namespace GorillaPronouns.Behaviours
 
             #endregion
 
-            if (IdentityUtils.IsValidPronouns(Pronouns) && !string.IsNullOrEmpty(Pronouns))
+            bool isValid = IdentityUtils.IsValidPronouns(Pronouns);
+            pronounTextInner.gameObject.SetActive(isValid);
+            if (pronounTextInner.gameObject.activeSelf)
             {
                 string displayPronouns = Pronouns.ToUpper();
                 pronounTextInner.text = displayPronouns;
                 pronounTextOuter.text = displayPronouns;
-
-                return;
             }
-
-            pronounTextInner.text = string.Empty;
-            pronounTextOuter.text = string.Empty;
         }
     }
 }

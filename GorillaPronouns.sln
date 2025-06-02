@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35919.96
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GorillaPronouns", "GorillaPronouns\GorillaPronouns.csproj", "{EFC7D475-752B-403D-A682-00A69AD47A1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GorillaPronouns.InfoWatch", "GorillaPronouns.InfoWatch\GorillaPronouns.InfoWatch.csproj", "{8362B327-B768-4739-8644-0E28A51BCACC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EFC7D475-752B-403D-A682-00A69AD47A1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFC7D475-752B-403D-A682-00A69AD47A1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFC7D475-752B-403D-A682-00A69AD47A1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFC7D475-752B-403D-A682-00A69AD47A1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8362B327-B768-4739-8644-0E28A51BCACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8362B327-B768-4739-8644-0E28A51BCACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8362B327-B768-4739-8644-0E28A51BCACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8362B327-B768-4739-8644-0E28A51BCACC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {952747EB-8BE0-4BE4-83F8-A2310DBAEF6C}
+	EndGlobalSection
+EndGlobal

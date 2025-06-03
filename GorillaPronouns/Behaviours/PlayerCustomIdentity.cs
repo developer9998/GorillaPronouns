@@ -11,14 +11,16 @@ namespace GorillaPronouns.Behaviours
         public string Pronouns = string.Empty;
 
         public VRRig Rig;
-        public NetPlayer Creator;
+        public NetPlayer Player;
 
-        private TMP_Text pronounTextInner, pronounTextOuter;
+        private TMP_Text pronounText, pronounTextOutline;
 
         public void Awake()
         {
+            enabled = false;
+
             Rig = GetComponent<VRRig>();
-            Creator = Rig.isOfflineVRRig ? NetworkSystem.Instance.LocalPlayer : Rig.Creator;
+            Player = Rig.isOfflineVRRig ? NetworkSystem.Instance.GetLocalPlayer() : Rig.Creator;
 
             #region Pronoun nametag setup
 
@@ -29,8 +31,8 @@ namespace GorillaPronouns.Behaviours
             pronounText1.transform.localPosition = playerText1.transform.localPosition;
             pronounText1.transform.eulerAngles = playerText1.transform.eulerAngles;
 
-            pronounTextInner = pronounText1.GetComponent<TMP_Text>();
-            pronounTextInner.enabled = true;
+            pronounText = pronounText1.GetComponent<TMP_Text>();
+            pronounText.enabled = true;
 
             TMP_Text playerText2 = Rig.playerText2;
 
@@ -39,8 +41,8 @@ namespace GorillaPronouns.Behaviours
             pronounText2.transform.localPosition = playerText2.transform.localPosition;
             pronounText2.transform.localEulerAngles = playerText2.transform.localEulerAngles;
 
-            pronounTextOuter = pronounText2.GetComponent<TMP_Text>();
-            pronounTextOuter.enabled = true;
+            pronounTextOutline = pronounText2.GetComponent<TMP_Text>();
+            pronounTextOutline.enabled = true;
 
             pronounText2.transform.SetParent(pronounText1);
             pronounText1.transform.SetParent(playerText1.transform);
@@ -50,12 +52,25 @@ namespace GorillaPronouns.Behaviours
             pronounText1.gameObject.SetActive(false);
 
             #endregion
+
+            enabled = true;
+        }
+
+        public void Update()
+        {
+            if (pronounText.color != Rig.playerText1.color)
+                pronounText.color = Rig.playerText1.color;
+
+            if (pronounTextOutline.color != Rig.playerText2.color)
+                pronounTextOutline.color = Rig.playerText2.color;
         }
 
         public void OnDestroy()
         {
-            if (pronounTextInner != null)
-                Destroy(pronounTextInner.gameObject);
+            if (enabled)
+            {
+                Destroy(pronounText.gameObject);
+            }
         }
 
         public void UpdateName()
@@ -65,17 +80,17 @@ namespace GorillaPronouns.Behaviours
             Rig.playerText1.ForceMeshUpdate();
             float lineHeight = (Rig.playerText1.textInfo.lineCount / 2f) - 0.5f;
             float textHeight = 6.45f + lineHeight;
-            pronounTextInner.transform.localPosition = Vector3.down * textHeight;
+            pronounText.transform.localPosition = Vector3.down * textHeight;
 
             #endregion
 
             bool isValid = IdentityUtils.IsValidPronouns(Pronouns);
-            pronounTextInner.gameObject.SetActive(isValid);
-            if (pronounTextInner.gameObject.activeSelf)
+            pronounText.gameObject.SetActive(isValid);
+            if (pronounText.gameObject.activeSelf)
             {
                 string displayPronouns = Pronouns.ToUpper();
-                pronounTextInner.text = displayPronouns;
-                pronounTextOuter.text = displayPronouns;
+                pronounText.text = displayPronouns;
+                pronounTextOutline.text = displayPronouns;
             }
         }
     }

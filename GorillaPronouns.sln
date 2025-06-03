@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GorillaPronouns", "GorillaP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GorillaPronouns.InfoWatch", "GorillaPronouns.InfoWatch\GorillaPronouns.InfoWatch.csproj", "{8362B327-B768-4739-8644-0E28A51BCACC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GorillaPronouns.ComputerInterface", "GorillaPronouns.CI\GorillaPronouns.ComputerInterface.csproj", "{246C5BB6-306E-4695-A92D-6264A2545604}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8362B327-B768-4739-8644-0E28A51BCACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8362B327-B768-4739-8644-0E28A51BCACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8362B327-B768-4739-8644-0E28A51BCACC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{246C5BB6-306E-4695-A92D-6264A2545604}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{246C5BB6-306E-4695-A92D-6264A2545604}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{246C5BB6-306E-4695-A92D-6264A2545604}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{246C5BB6-306E-4695-A92D-6264A2545604}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

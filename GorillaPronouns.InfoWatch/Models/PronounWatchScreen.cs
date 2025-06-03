@@ -37,7 +37,7 @@ namespace GorillaPronouns.InfoWatch.Models
                 case EIdentityControlState.ViewPronouns:
                     if (arguments.ElementAtOrDefault(0) is string[] presets)
                     {
-                        lines.AddLine($"Pronouns: {(string.IsNullOrEmpty(Singleton<IdentityHandler>.Instance.LocalPlayer.Pronouns) ? "Unlisted" : Singleton<IdentityHandler>.Instance.LocalPlayer.Pronouns)}");
+                        lines.AddLine($"Pronouns: {(string.IsNullOrEmpty(Singleton<IdentityHandler>.Instance.LocalPlayer.Pronouns) ? "Unlisted" : Singleton<IdentityHandler>.Instance.LocalPlayer.Pronouns.ToLower())}");
                         lines.AddLines(1);
                         lines.AddLine("Select mixed pronoun:", new WidgetButton(OnAdvancedSelected));
                         lines.AddLines(1);
@@ -50,7 +50,7 @@ namespace GorillaPronouns.InfoWatch.Models
                 case EIdentityControlState.DefineSubject:
                     if (arguments.ElementAtOrDefault(0) is string[] subjects)
                     {
-                        lines.AddLine("Select the subject pronoun");
+                        lines.AddLine("Select the first pronoun");
                         lines.AddLines(1);
                         foreach (string pronoun in subjects)
                         {
@@ -61,7 +61,7 @@ namespace GorillaPronouns.InfoWatch.Models
                 case EIdentityControlState.DefineObject:
                     if (arguments.ElementAtOrDefault(0) is string[] objects)
                     {
-                        lines.AddLine("Select the object pronoun");
+                        lines.AddLine("Select the second pronoun");
                         lines.AddLines(1);
                         foreach (string pronoun in objects)
                         {

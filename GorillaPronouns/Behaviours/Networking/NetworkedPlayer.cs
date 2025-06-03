@@ -27,6 +27,18 @@ namespace GorillaPronouns.Behaviours.Networking
                 NetworkHandler.Instance.OnPlayerPropertiesUpdate(playerRef, playerRef.CustomProperties);
         }
 
+        public void OnDestroy()
+        {
+            NetworkHandler.Instance.OnPlayerPropertyChanged -= OnPlayerPropertyChanged;
+
+            if (HasConfiguredPronouns)
+            {
+                HasConfiguredPronouns = false;
+                playerIdentity.Pronouns = string.Empty;
+                playerIdentity.UpdateName();
+            }
+        }
+
         public void OnPlayerPropertyChanged(NetPlayer player, Dictionary<string, object> properties)
         {
             if (player == Owner)

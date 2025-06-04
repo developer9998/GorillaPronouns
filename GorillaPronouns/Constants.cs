@@ -14,6 +14,8 @@
 
         public readonly static string[] ObjectPronouns = ["Them", "Him", "Her", "Its"];
 
+        public readonly static string[] UnknownPronouns = ["Unknown", "N/A", "Silly", "Looked at me funny", "Dev was here", "Didn't set my pronouns correctly", "Yits been.."]; // https://youtu.be/fC_q9KPczAg
+
         public const float NetworkSetInterval = 0.25f;
 
         public const string CustomProperty = "GPronouns";

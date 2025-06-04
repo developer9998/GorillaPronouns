@@ -32,7 +32,7 @@ namespace GorillaPronouns.Behaviours
                 if (pronouns is null)
                     throw new ArgumentNullException(nameof(pronouns), "Pronouns are null - if attempting to configure unlisted pronouns, send an empty string");
 
-                if (!IdentityUtils.IsValidPronouns(pronouns))
+                if (!IdentityUtils.IsPronounsRecognized(pronouns))
                     throw new ArgumentException("Pronouns are not valid", nameof(pronouns));
 
                 savedPronouns.Value = pronouns;
@@ -40,7 +40,7 @@ namespace GorillaPronouns.Behaviours
                 LocalPlayer.Pronouns = pronouns;
                 LocalPlayer.UpdateName();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logging.Fatal("Pronouns failed to configure");
                 Logging.Error(ex);

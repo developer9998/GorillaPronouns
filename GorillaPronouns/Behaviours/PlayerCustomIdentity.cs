@@ -1,4 +1,4 @@
-﻿using System.Security.Cryptography;
+﻿using GorillaExtensions;
 using GorillaPronouns.Utils;
 using TMPro;
 using UnityEngine;
@@ -84,8 +84,8 @@ namespace GorillaPronouns.Behaviours
 
             #endregion
 
-            bool isValid = IdentityUtils.IsValidPronouns(Pronouns);
-            pronounText.gameObject.SetActive(isValid);
+            string pronounsToSet = IdentityUtils.IsPronounsRecognized(Pronouns) ? Constants.UnknownPronouns.GetRandomItem() : Pronouns.ToUpper();
+            pronounText.gameObject.SetActive(!string.IsNullOrEmpty(pronounsToSet) && !string.IsNullOrWhiteSpace(pronounsToSet));
             if (pronounText.gameObject.activeSelf)
             {
                 string displayPronouns = Pronouns.ToUpper();

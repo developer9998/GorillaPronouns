@@ -1,4 +1,5 @@
 ﻿using System;
+using GorillaPronouns.Extensions;
 using GorillaPronouns.Tools;
 using ControlState = GorillaPronouns.Models.EIdentityControlState;
 
@@ -59,7 +60,7 @@ namespace GorillaPronouns.Models
 
                 case ControlState.SubmitPronouns:
                     Logging.Info($"CONFIGURED IDENTITY! User now goes by {Pronouns}");
-                    OnConfiguredIdentity?.Invoke(Pronouns);
+                    OnConfiguredIdentity?.SafeInvoke(Pronouns);
                     SwitchState(ControlState.ViewPronouns);
                     break;
             }

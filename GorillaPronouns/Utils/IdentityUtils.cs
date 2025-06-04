@@ -5,7 +5,7 @@ namespace GorillaPronouns.Utils
 {
     public class IdentityUtils
     {
-        public static bool IsValidPronouns(string pronouns)
+        public static bool IsPronounsRecognized(string pronouns)
         {
             if (string.IsNullOrEmpty(pronouns))
                 return pronouns is not null;

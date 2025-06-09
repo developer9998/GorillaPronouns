@@ -39,11 +39,11 @@ namespace GorillaPronouns.InfoWatch.Models
                     {
                         lines.AddLine($"Pronouns: {(string.IsNullOrEmpty(Singleton<IdentityHandler>.Instance.LocalPlayer.Pronouns) ? "Unlisted" : Singleton<IdentityHandler>.Instance.LocalPlayer.Pronouns.ToLower())}");
                         lines.AddLines(1);
-                        lines.AddLine("Select mixed pronoun:", new WidgetButton(OnAdvancedSelected));
+                        lines.AddLine("Select mixed pronoun:", new PushButton(OnAdvancedSelected));
                         lines.AddLines(1);
                         foreach (string pronouns in presets)
                         {
-                            lines.AddLine(string.IsNullOrEmpty(pronouns) ? "Unlisted" : pronouns, new WidgetButton(OnPresetSelected, pronouns));
+                            lines.AddLine(string.IsNullOrEmpty(pronouns) ? "Unlisted" : pronouns, new PushButton(OnPresetSelected, pronouns));
                         }
                     }
                     break;
@@ -54,7 +54,7 @@ namespace GorillaPronouns.InfoWatch.Models
                         lines.AddLines(1);
                         foreach (string pronoun in subjects)
                         {
-                            lines.AddLine(pronoun, new WidgetButton(OnSubjectSelected, pronoun));
+                            lines.AddLine(pronoun, new PushButton(OnSubjectSelected, pronoun));
                         }
                     }
                     break;
@@ -65,7 +65,7 @@ namespace GorillaPronouns.InfoWatch.Models
                         lines.AddLines(1);
                         foreach (string pronoun in objects)
                         {
-                            lines.AddLine(pronoun, new WidgetButton(OnObjectSelected, pronoun));
+                            lines.AddLine(pronoun, new PushButton(OnObjectSelected, pronoun));
                         }
                     }
                     break;

@@ -5,20 +5,18 @@ using GorillaInfoWatch.Models.Widgets;
 using GorillaPronouns.Behaviours;
 using GorillaPronouns.Models;
 
-[assembly: WatchCompatibleMod]
-
 namespace GorillaPronouns.InfoWatch.Models
 {
-    [WatchCustomPage, DisplayAtHomeScreen]
-    internal class PronounWatchScreen : WatchScreen
+    [ShowOnHomeScreen]
+    internal class PronounWatchScreen : InfoWatchScreen
     {
         public override string Title => "Pronouns";
 
         private IdentityController controller;
 
-        public override void OnScreenOpen()
+        public override void OnShow()
         {
-            base.OnScreenOpen();
+            base.OnShow();
 
             if (controller is not null)
                 controller.SwitchState(EIdentityControlState.ViewPronouns);
@@ -37,35 +35,35 @@ namespace GorillaPronouns.InfoWatch.Models
                 case EIdentityControlState.ViewPronouns:
                     if (arguments.ElementAtOrDefault(0) is string[] presets)
                     {
-                        lines.AddLine($"Pronouns: {(string.IsNullOrEmpty(Singleton<IdentityHandler>.Instance.LocalPlayer.Pronouns) ? "Unlisted" : Singleton<IdentityHandler>.Instance.LocalPlayer.Pronouns.ToLower())}");
-                        lines.AddLines(1);
-                        lines.AddLine("Select mixed pronoun:", new WidgetButton(OnAdvancedSelected));
-                        lines.AddLines(1);
+                        lines.Add($"Pronouns: {(string.IsNullOrEmpty(Singleton<IdentityHandler>.Instance.LocalPlayer.Pronouns) ? "Unlisted" : Singleton<IdentityHandler>.Instance.LocalPlayer.Pronouns.ToLower())}");
+                        lines.Skip();
+                        lines.Add("Select mixed pronoun:", new Widget_PushButton(OnAdvancedSelected));
+                        lines.Skip();
                         foreach (string pronouns in presets)
                         {
-                            lines.AddLine(string.IsNullOrEmpty(pronouns) ? "Unlisted" : pronouns, new WidgetButton(OnPresetSelected, pronouns));
+                            lines.Add(string.IsNullOrEmpty(pronouns) ? "Unlisted" : pronouns, new Widget_PushButton(OnPresetSelected, pronouns));
                         }
                     }
                     break;
                 case EIdentityControlState.DefineSubject:
                     if (arguments.ElementAtOrDefault(0) is string[] subjects)
                     {
-                        lines.AddLine("Select the first pronoun");
-                        lines.AddLines(1);
+                        lines.Add("Select the first pronoun");
+                        lines.Skip();
                         foreach (string pronoun in subjects)
                         {
-                            lines.AddLine(pronoun, new WidgetButton(OnSubjectSelected, pronoun));
+                            lines.Add(pronoun, new Widget_PushButton(OnSubjectSelected, pronoun));
                         }
                     }
                     break;
                 case EIdentityControlState.DefineObject:
                     if (arguments.ElementAtOrDefault(0) is string[] objects)
                     {
-                        lines.AddLine("Select the second pronoun");
-                        lines.AddLines(1);
+                        lines.Add("Select the second pronoun");
+                        lines.Skip();
                         foreach (string pronoun in objects)
                         {
-                            lines.AddLine(pronoun, new WidgetButton(OnObjectSelected, pronoun));
+                            lines.Add(pronoun, new Widget_PushButton(OnObjectSelected, pronoun));
                         }
                     }
                     break;
@@ -79,7 +77,7 @@ namespace GorillaPronouns.InfoWatch.Models
             SetContent();
         }
 
-        public void OnPresetSelected(bool isButtonPressed, object[] parameters)
+        public void OnPresetSelected(object[] parameters)
         {
             if (parameters.ElementAtOrDefault(0) is string presetName)
             {
@@ -88,13 +86,13 @@ namespace GorillaPronouns.InfoWatch.Models
             }
         }
 
-        public void OnAdvancedSelected(bool isButtonPressed, object[] parameters)
+        public void OnAdvancedSelected(object[] parameters)
         {
             controller.SwitchState(EIdentityControlState.DefineSubject);
             SetContent();
         }
 
-        public void OnSubjectSelected(bool isButtonPressed, object[] parameters)
+        public void OnSubjectSelected(object[] parameters)
         {
             if (parameters.ElementAtOrDefault(0) is string subjectPronoun)
             {
@@ -103,7 +101,7 @@ namespace GorillaPronouns.InfoWatch.Models
             }
         }
 
-        public void OnObjectSelected(bool isButtonPressed, object[] parameters)
+        public void OnObjectSelected(object[] parameters)
         {
             if (parameters.ElementAtOrDefault(0) is string objectPronoun)
             {

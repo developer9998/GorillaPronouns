@@ -5,9 +5,11 @@ using GorillaInfoWatch.Models.Widgets;
 using GorillaPronouns.Behaviours;
 using GorillaPronouns.Models;
 
+[assembly: InfoWatchCompatible]
+
 namespace GorillaPronouns.InfoWatch.Models
 {
-    [ShowOnHomeScreen]
+    [ShowOnHomeScreen(DisplayTitle = "GorillaPronouns")]
     internal class PronounWatchScreen : InfoWatchScreen
     {
         public override string Title => "Pronouns";

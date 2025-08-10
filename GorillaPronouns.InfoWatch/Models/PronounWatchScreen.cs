@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using GorillaInfoWatch.Attributes;
+using GorillaInfoWatch.Models.Attributes;
 using GorillaInfoWatch.Models;
 using GorillaInfoWatch.Models.Widgets;
 using GorillaPronouns.Behaviours;
@@ -10,7 +10,7 @@ using GorillaPronouns.Models;
 namespace GorillaPronouns.InfoWatch.Models
 {
     [ShowOnHomeScreen(DisplayTitle = "GorillaPronouns")]
-    internal class PronounWatchScreen : InfoWatchScreen
+    internal class PronounWatchScreen : Screen
     {
         public override string Title => "Pronouns";
 
@@ -26,7 +26,7 @@ namespace GorillaPronouns.InfoWatch.Models
                 controller = Singleton<IdentityHandler>.Instance.GetIdentity(OnConfiguredIdentity);
         }
 
-        public override ScreenContent GetContent()
+        public override ScreenLines GetContent()
         {
             LineBuilder lines = new();
 

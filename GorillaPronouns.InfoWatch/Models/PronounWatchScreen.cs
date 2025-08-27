@@ -10,23 +10,19 @@ using GorillaPronouns.Models;
 namespace GorillaPronouns.InfoWatch.Models
 {
     [ShowOnHomeScreen(DisplayTitle = "GorillaPronouns")]
-    internal class PronounWatchScreen : Screen
+    internal class PronounWatchScreen : InfoScreen
     {
         public override string Title => "Pronouns";
 
         private IdentityController controller;
 
-        public override void OnShow()
+        public override void OnScreenLoad()
         {
-            base.OnShow();
-
-            if (controller is not null)
-                controller.SwitchState(EIdentityControlState.ViewPronouns);
-            else
-                controller = Singleton<IdentityHandler>.Instance.GetIdentity(OnConfiguredIdentity);
+            if (controller is not null) controller.SwitchState(EIdentityControlState.ViewPronouns);
+            else controller = Singleton<IdentityHandler>.Instance.GetIdentity(OnConfiguredIdentity);
         }
 
-        public override ScreenLines GetContent()
+        public override InfoContent GetContent()
         {
             LineBuilder lines = new();
 

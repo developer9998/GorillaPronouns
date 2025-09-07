@@ -13,7 +13,7 @@ namespace GorillaPronouns.Behaviours
         public VRRig Rig;
         public NetPlayer Player;
 
-        private TMP_Text pronounText, pronounTextOutline;
+        private TMP_Text pronounText; //, pronounTextOutline;
 
         public void Awake()
         {
@@ -34,17 +34,17 @@ namespace GorillaPronouns.Behaviours
             pronounText = pronounText1.GetComponent<TMP_Text>();
             pronounText.enabled = true;
 
-            TMP_Text playerText2 = Rig.playerText2;
+            // TMP_Text playerText2 = Rig.playerText2;
 
-            Transform pronounText2 = Instantiate(playerText2.gameObject, playerText2.transform.parent).transform;
+            // Transform pronounText2 = Instantiate(playerText2.gameObject, playerText2.transform.parent).transform;
 
-            pronounText2.transform.localPosition = playerText2.transform.localPosition;
-            pronounText2.transform.localEulerAngles = playerText2.transform.localEulerAngles;
+            // pronounText2.transform.localPosition = playerText2.transform.localPosition;
+            // pronounText2.transform.localEulerAngles = playerText2.transform.localEulerAngles;
 
-            pronounTextOutline = pronounText2.GetComponent<TMP_Text>();
-            pronounTextOutline.enabled = true;
+            // pronounTextOutline = pronounText2.GetComponent<TMP_Text>();
+            // pronounTextOutline.enabled = true;
 
-            pronounText2.transform.SetParent(pronounText1);
+            // pronounText2.transform.SetParent(pronounText1);
             pronounText1.transform.SetParent(playerText1.transform);
             pronounText1.transform.localPosition = Vector3.down * 6.45f;
             pronounText1.transform.localEulerAngles = Vector3.zero;
@@ -58,11 +58,11 @@ namespace GorillaPronouns.Behaviours
 
         public void Update()
         {
-            if (pronounText.color != Rig.playerText1.color)
-                pronounText.color = Rig.playerText1.color;
+            if (pronounText.color != Rig.playerText1.color) pronounText.color = Rig.playerText1.color;
 
-            if (pronounTextOutline.color != Rig.playerText2.color)
-                pronounTextOutline.color = Rig.playerText2.color;
+            /*
+            if (pronounTextOutline.color != Rig.playerText2.color) pronounTextOutline.color = Rig.playerText2.color;
+            */
         }
 
         public void OnDestroy()
@@ -90,7 +90,7 @@ namespace GorillaPronouns.Behaviours
             {
                 string displayPronouns = Pronouns.ToUpper();
                 pronounText.text = displayPronouns;
-                pronounTextOutline.text = displayPronouns;
+                // pronounTextOutline.text = displayPronouns;
             }
         }
     }

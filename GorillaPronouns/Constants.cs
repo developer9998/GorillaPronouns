@@ -6,7 +6,7 @@
 
         public const string Name = "GorillaPronouns";
 
-        public const string Version = "1.0.0";
+        public const string Version = "1.0.1";
 
         public readonly static string[] PronounPresets = [string.Empty, "They/Them", "He/Him", "She/Her", "It/Its", "Any", "Ask"];
 

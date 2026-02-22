@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using GorillaPronouns.Tools;
+﻿using GorillaPronouns.Tools;
+using System.Linq;
 
 namespace GorillaPronouns.Utils
 {

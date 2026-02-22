@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using GorillaPronouns.Tools;
-using Photon.Realtime;
+﻿using ExitGames.Client.Photon;
 using UnityEngine;
 
 namespace GorillaPronouns.Behaviours.Networking
@@ -16,21 +13,13 @@ namespace GorillaPronouns.Behaviours.Networking
 
         private PlayerCustomIdentity playerIdentity;
 
-        public void Start()
+        public void Awake()
         {
-            if (!TryGetComponent(out playerIdentity))
-                playerIdentity = gameObject.AddComponent<PlayerCustomIdentity>();
-
-            NetworkHandler.Instance.OnPlayerPropertyChanged += OnPlayerPropertyChanged;
-
-            if (!HasConfiguredPronouns && Owner is PunNetPlayer punPlayer && punPlayer.PlayerRef is Player playerRef)
-                NetworkHandler.Instance.OnPlayerPropertiesUpdate(playerRef, playerRef.CustomProperties);
+            if (!TryGetComponent(out playerIdentity)) playerIdentity = gameObject.AddComponent<PlayerCustomIdentity>();
         }
 
         public void OnDestroy()
         {
-            NetworkHandler.Instance.OnPlayerPropertyChanged -= OnPlayerPropertyChanged;
-
             if (HasConfiguredPronouns)
             {
                 HasConfiguredPronouns = false;
@@ -39,17 +28,12 @@ namespace GorillaPronouns.Behaviours.Networking
             }
         }
 
-        public void OnPlayerPropertyChanged(NetPlayer player, Dictionary<string, object> properties)
+        public void OnPlayerPropertyChanged(Hashtable properties)
         {
-            if (player == Owner)
+            if (properties.TryGetValue("Pronouns", out object obj) && obj is string pronouns)
             {
-                Logging.Info($"{player.NickName} got properties: {string.Join(", ", properties.Select(prop => $"[{prop.Key}: {prop.Value}]"))}");
-
-                if (properties.TryGetValue("Pronouns", out object obj) && obj is string pronouns)
-                {
-                    playerIdentity.Pronouns = pronouns;
-                    playerIdentity.UpdateName();
-                }
+                playerIdentity.Pronouns = pronouns;
+                playerIdentity.UpdateName();
             }
         }
     }

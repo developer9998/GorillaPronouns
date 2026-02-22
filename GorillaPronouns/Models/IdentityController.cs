@@ -1,6 +1,6 @@
-﻿using System;
-using GorillaPronouns.Extensions;
+﻿using GorillaPronouns.Extensions;
 using GorillaPronouns.Tools;
+using System;
 using ControlState = GorillaPronouns.Models.EIdentityControlState;
 
 namespace GorillaPronouns.Models

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
-using BepInEx.Configuration;
+﻿using BepInEx.Configuration;
 using GorillaPronouns.Behaviours.Networking;
 using GorillaPronouns.Models;
 using GorillaPronouns.Tools;
 using GorillaPronouns.Utils;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace GorillaPronouns.Behaviours
 {

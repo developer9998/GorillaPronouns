@@ -30,6 +30,8 @@ namespace GorillaPronouns.Behaviours.Networking
 
         public void OnPlayerPropertyChanged(Hashtable properties)
         {
+            HasConfiguredPronouns = true;
+
             if (properties.TryGetValue("Pronouns", out object obj) && obj is string pronouns)
             {
                 playerIdentity.Pronouns = pronouns;

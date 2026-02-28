@@ -10,7 +10,7 @@ namespace GorillaPronouns.Utils
             if (string.IsNullOrEmpty(pronouns))
                 return pronouns is not null;
 
-            if (!pronouns.Contains("/"))
+            if (pronouns.Split('/').Length != 2)
                 return Constants.PronounPresets.Contains(pronouns);
 
             string subjectStart = Constants.SubjectPronouns.FirstOrDefault(pronouns.StartsWith) ?? null;

@@ -9,10 +9,10 @@ using GorillaPronouns.Models;
 
 namespace GorillaPronouns.InfoWatch.Models
 {
-    [ShowOnHomeScreen(DisplayTitle = "GorillaPronouns")]
+    [ShowOnHomeScreen(DisplayTitle = "Pronouns")]
     internal class PronounWatchScreen : InfoScreen
     {
-        public override string Title => "Pronouns";
+        public override string Title => "GorillaPronouns";
 
         private IdentityController controller;
 
